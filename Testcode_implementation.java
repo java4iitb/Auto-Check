@@ -2,22 +2,37 @@ import java.io.*;
 class Testcode_implementation implements Testcode_interface
 {
 
- public int additiontest(String s, String ff)
+
+
+ public int additiontest(String s, String ff, String l, String ofn)
   {
    boolean success = false;
     
     String check="";
     int program=0;
    int count2=0;
-   
+  String compile1 = null;
+   String run2 = null;
    try
    {
 	 			
 				//String s1="/home/ttt/moodle-test/userid";
 				File f=new File(s);
-				
-				String compile1= "gcc "+ff+" -o addd";
-	 				
+			       if(l.equalsIgnoreCase("C"))
+				{	
+				 compile1= "gcc "+ff+" -o addd";
+				 run2 = "./addd";
+	 			}	
+                                else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
+				{
+ 		                 compile1= "g++ "+ff+" -o addd";
+				 run2 = "./addd";
+				}
+				else if(l.equalsIgnoreCase("java"))
+				{
+ 		                 compile1= "javac  "+ff;
+				 run2 = "java "+ofn;
+				}
 			Process p1 = Runtime.getRuntime().exec(compile1,null,f);
 		try
 		{
@@ -41,7 +56,7 @@ class Testcode_implementation implements Testcode_interface
 			if(success)	
 	 		{
 	 			//String compile2 = "gcc "+fil+"2.c -o putt";
-	 			String run2 = "./addd";
+	 			
 				String input12[] = new String[3]; String input22[] = new String[3];
 				String output2[] = new String[3];
 				input12[0]= "1";
@@ -112,19 +127,35 @@ class Testcode_implementation implements Testcode_interface
 
 
   
-  public int sumchecktest(String s,String ff)
+  public int sumchecktest(String s,String ff, String l, String ofn)
  { 
         boolean success = false;
     
     String check="";
     int program=0;
     int count2=0;
-			try
+	  String compile1 = null;
+   String run2 = null;
+		try
 	 		{
 	 		File f=new File(s);
 				
-				String compile1= "gcc "+ff+" -o sum";
-	 				
+			  if(l.equalsIgnoreCase("C"))
+				{	
+				 compile1= "gcc "+ff+" -o sum";
+				 run2 = "./sum";
+	 			}	
+                                else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
+				{
+ 		                 compile1= "g++ "+ff+" -o sum";
+				 run2 = "./sum";
+				}
+				else if(l.equalsIgnoreCase("java"))
+				{
+ 		                 compile1= "javac  "+ff;
+				 run2 = "java "+ofn;
+				}			
+ 				
 			Process p1 = Runtime.getRuntime().exec(compile1,null,f);
 		try
 		{
@@ -148,8 +179,7 @@ class Testcode_implementation implements Testcode_interface
 			if(success)	
 	 		{
 	 			//String compile2 = "gcc "+fil+"2.c -o putt";
-	 			String run2 = "./sum";
-				String input12[] = new String[3]; String input22[] = new String[3];
+	 			String input12[] = new String[3]; String input22[] = new String[3];
 				String output2[] = new String[3];String output22[] = new String[3];
 				input12[0]= "1";
 				input12[1]= "100";
@@ -220,18 +250,34 @@ return count2;
 }
  
  
-  public int perimetertest(String s,String ff)
+  public int perimetertest(String s,String ff, String l, String ofn)
  {
     boolean success = false;
     
     String check="";
     int program=0;
     int count2=0;
-			try
+	  String compile1 = null;
+   String run2 = null;
+		try
 	 		{
 	 		File f=new File(s);
 				
-				String compile1= "gcc "+ff+" -o peri";
+			 if(l.equalsIgnoreCase("C"))
+				{	
+				 compile1= "gcc "+ff+" -o peri";
+				 run2 = "./peri";
+	 			}	
+                                else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
+				{
+ 		                 compile1= "g++ "+ff+" -o peri";
+				 run2 = "./peri";
+				}
+				else if(l.equalsIgnoreCase("java"))
+				{
+ 		                 compile1= "javac  "+ff;
+				 run2 = "java "+ofn;
+				}
 	 				
 			Process p1 = Runtime.getRuntime().exec(compile1,null,f);
 		try
@@ -256,7 +302,7 @@ return count2;
 			if(success)	
 	 		{
 	 		//String compile2 = "gcc "+fil+"2.c -o putt";
-	 			String run2 = "./peri";
+	 	
 				String input12[] = new String[3]; //String input22[] = new String[3];
 				String output2[] = new String[3];
 				input12[0]= "11";
@@ -320,21 +366,37 @@ return count2;
  }
  
  
-  public int averagetest(String s, String ff)
+  public int averagetest(String s, String ff, String l, String ofn)
   {
    boolean success = false;
     
     String check="";
     int program=0;
    int count2=0;
-   
+     String compile1 = null;
+   String run2 = null;
+
    try
    {
 	 			
 				//String s1="/home/ttt/moodle-test/userid";
 				File f=new File(s);
 				
-				String compile1= "gcc "+ff+" -o avg";
+				 if(l.equalsIgnoreCase("C"))
+				{	
+				 compile1= "gcc "+ff+" -o avg";
+				 run2 = "./avg";
+	 			}	
+                                else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
+				{
+ 		                 compile1= "g++ "+ff+" -o avg";
+				 run2 = "./avg";
+				}
+				else if(l.equalsIgnoreCase("java"))
+				{
+ 		                 compile1= "javac  "+ff;
+				 run2 = "java "+ofn;
+				}
 	 				
 			Process p1 = Runtime.getRuntime().exec(compile1,null,f);
 		try
@@ -359,7 +421,7 @@ return count2;
 			if(success)	
 	 		{
 	 			//String compile2 = "gcc "+fil+"2.c -o putt";
-	 			String run2 = "./avg";
+	 			
 				String input12[] = new String[3]; String input22[] = new String[3];String input32[] = new String[3];
 				String output2[] = new String[3];
 				input12[0]= "50";
@@ -439,18 +501,34 @@ return count2;
  
  
  
- public int interesttest(String s, String ff)
+ public int interesttest(String s, String ff, String l, String ofn)
  {
   boolean success = false;
     
     String check="";
     int program=0;
     int count2=0;
-			try
+	  String compile1 = null;
+   String run2 = null;
+		try
 	 		{
 	 		File f=new File(s);
 				
-				String compile1= "gcc "+ff+" -o interest";
+				 if(l.equalsIgnoreCase("C"))
+				{	
+				 compile1= "gcc "+ff+" -o interest";
+				 run2 = "./interest";
+	 			}	
+                                else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
+				{
+ 		                 compile1= "g++ "+ff+" -o interest";
+				 run2 = "./interest";
+				}
+				else if(l.equalsIgnoreCase("java"))
+				{
+ 		                 compile1= "javac  "+ff;
+				 run2 = "java "+ofn;
+				}
 	 				
 			Process p1 = Runtime.getRuntime().exec(compile1,null,f);
 		try
@@ -474,7 +552,7 @@ return count2;
 
 			if(success)	
 	 		{
-	 			String run2 = "./interest";
+	 		
 				String input12[] = new String[3]; String input22[] = new String[3];String input32[] = new String[3];
 				String output2[] = new String[3];
 				input12[0]= "100";  
