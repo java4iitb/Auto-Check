@@ -3,28 +3,51 @@ import java.sql.*;
 import java.util.*;
 public class Autocheck
 {
+
   public static void main(String arg[])
+  {
+  try
   {
   int quizid=0;
   if(arg[0]!=null)
   {
- quizid=Integer.parseInt(arg[0]);
+  quizid=Integer.parseInt(arg[0]);
   }
-  else
-  {
+
+ String language = arg[1];
+ String extension = null;
+ String ofilename = null; 
+
+if(language.equalsIgnoreCase("C"))
+ {
+   extension = ".c";
+ }
+else if((language.equalsIgnoreCase("C++")) || (language.equalsIgnoreCase("CPP")))
+{
+  extension = ".cpp";
+}
+else if(language.equalsIgnoreCase("java"))
+{
+ extension = ".java";
+}
+else
+{
+    System.out.println("Enter a proper language. Thank you!!!!");
     System.exit(0);
-  }
- String filename = null;
+}
+
+    String filename = null;
     File file=null;
-  String location=null; String dir_path=null;
-  int ccc=0;
-   String question=null;
-   String key=null;
+    String location=null; String dir_path=null;
+    int ccc=0;
+    String question=null;
+    String key=null;
     int update =0;
     double sumgrades=0;
     double average=0;
-   ArrayList<Integer> userid = new ArrayList<Integer>();
-   ArrayList<Integer> uniqueid = new ArrayList<Integer>();
+  
+    ArrayList<Integer> userid = new ArrayList<Integer>();
+    ArrayList<Integer> uniqueid = new ArrayList<Integer>();
 
     ArrayList<Integer> attemptid = new ArrayList<Integer>();
     ArrayList<Integer> attemptid2 = new ArrayList<Integer>();
@@ -118,7 +141,8 @@ public class Autocheck
      String w =answer.get(z);
      if(w==null)
      {w="";}
-    filename = keyword.get(z)+".c";
+    ofilename = keyword.get(z)+"";
+    filename = ofilename+extension+"";
     file = new File(dir_path+"/"+filename);
     FileOutputStream fos = new FileOutputStream(file);
     DataOutputStream dos = new DataOutputStream(fos);
@@ -137,31 +161,31 @@ public class Autocheck
     if(key.equals("Addition"))
     {	
        Testcode_interface ttt = new Testcode_implementation();
-       ccc = ttt.additiontest(location,filename);
+       ccc = ttt.additiontest(location,filename,language,ofilename);
        System.out.println("\n\n\n\nfrom face add "+ccc);
      }
      else if(key.equals("SumCheck"))
      {
-       Testcode_interface ttt = new Testcode_implementation();
-       ccc = ttt.sumchecktest(location,filename);
+      Testcode_interface ttt = new Testcode_implementation();
+       ccc = ttt.sumchecktest(location,filename,language,ofilename);
        System.out.println("\n\n\n\nfrom face sum "+ccc);
      }
      else if(key.equals("Perimeter"))
      {
-       Testcode_interface ttt = new  Testcode_implementation();
-       ccc = ttt.perimetertest(location,filename);
+        Testcode_interface ttt = new Testcode_implementation();
+       ccc = ttt.perimetertest(location,filename,language,ofilename);
        System.out.println("\n\n\n\nfrom face peri "+ccc);
      }
      else if(key.equals("SimpleInterest"))
      {
-       Testcode_interface ttt = new  Testcode_implementation();
-       ccc = ttt.interesttest(location,filename);
+       Testcode_interface ttt = new Testcode_implementation();
+       ccc = ttt.interesttest(location,filename,language,ofilename);
        System.out.println("\n\n\n\nfrom face  interest"+ccc);
      }
       else if(key.equals("Average"))
      {
-       Testcode_interface ttt = new  Testcode_implementation();
-       ccc = ttt.interesttest(location,filename);
+       Testcode_interface ttt = new Testcode_implementation();
+       ccc = ttt.interesttest(location,filename,language,ofilename);
        System.out.println("\n\n\n\nfrom face  average"+ccc);
      }
      else
@@ -236,6 +260,7 @@ System.out.println("  pp"+sumgrades+average);
    
    
     }catch(Exception e){System.out.println(e);}
-      
+    }catch(Exception emain){System.out.println("Error: no arguments");}  
   }
+ 
 }
