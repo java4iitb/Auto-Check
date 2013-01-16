@@ -77,9 +77,9 @@ else
     ResultSetMetaData rsmd = rs.getMetaData();
     
     System.out.print(""+(rsmd.getColumnName(1)));
-   // System.out.print("\t\t"+(rsmd.getColumnName(2)));
+  /* // System.out.print("\t\t"+(rsmd.getColumnName(2)));
    // System.out.printx("\t\t"+(rsmd.getColumnName(3)));
-    //System.out.println("\t\t"+(rsmd.getColumnName(4)));
+    //System.out.println("\t\t"+(rsmd.getColumnName(4)));*/
     int j =0;
     
     
