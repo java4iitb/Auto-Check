@@ -197,12 +197,12 @@ else
      {
    if(ccc==3)
    {
-    update = sts3.executeUpdate("update mdl_question_attempt_steps set state='mangrright',fraction = 1 where userid ="+userid.get(x)+" and questionattemptid="+attemptid.get(z)+" and sequencenumber=2;");
+    update = sts3.executeUpdate("update mdl_question_attempt_steps set state='mangrright',fraction = 1 where userid ="+userid.get(x)+" and questionattemptid="+attemptid.get(z)+" and state='needsgrading';");
      System.out.println(""+update);
    }
    else
    {
-    update = sts3.executeUpdate("update mdl_question_attempt_steps set state='mangrwrong', fraction = 0 where userid ="+userid.get(x)+" and questionattemptid="+attemptid.get(z)+" and sequencenumber = 2;");
+    update = sts3.executeUpdate("update mdl_question_attempt_steps set state='mangrwrong', fraction = 0 where userid ="+userid.get(x)+" and questionattemptid="+attemptid.get(z)+" and state='needsgrading';");
     System.out.println(""+update);
    }
    }catch(Exception e3){System.out.println("e3 :"+e3);}
