@@ -60,7 +60,8 @@ else
     try
     {
      Class.forName("com.mysql.jdbc.Driver");
-     Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/moodle","root","root");
+     Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/OTC","javauser","*******");
+    // Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/newmoodle2_4","root","root");
      Statement sts1 = con.createStatement();
      Statement sts2 = con.createStatement();
      
@@ -70,16 +71,17 @@ else
      Statement sts6 =con.createStatement();
      
      
-     ResultSet rs = sts1.executeQuery("select userid, uniqueid from mdl_quiz_attempts where quiz="+quizid+" and sumgrades is NULL;");
+   ResultSet rs = sts1.executeQuery("select userid, uniqueid from mdl_quiz_attempts where quiz="+quizid+" and sumgrades is NULL;");
+    //  ResultSet rs = sts1.executeQuery("select userid, uniqueid from mdl_quiz_attempts where quiz="+quizid+";");
     
     
    /* ResultSet rs=sts1.executeQuery( "select a.userid,b.responsesummary,c.fraction,c.state from mdl_quiz_attempts a inner join mdl_question_attempts b on a.uniqueid=b.questionusageid inner join  mdl_question_attempt_steps c on c.questionattemptid = b.id where a.userid=2 and a.quiz=7;");*/
     ResultSetMetaData rsmd = rs.getMetaData();
     
     System.out.print(""+(rsmd.getColumnName(1)));
-  /* // System.out.print("\t\t"+(rsmd.getColumnName(2)));
+   // System.out.print("\t\t"+(rsmd.getColumnName(2)));
    // System.out.printx("\t\t"+(rsmd.getColumnName(3)));
-    //System.out.println("\t\t"+(rsmd.getColumnName(4)));*/
+    //System.out.println("\t\t"+(rsmd.getColumnName(4)));
     int j =0;
     
     
@@ -128,8 +130,9 @@ else
     
     try
     {
-    dir_path="/home/ttt/moodle-test/"+userid.get(x)+uniqueid.get(x)+"";
-    
+     dir_path="/home/javauser/testing_v2/cache/"+userid.get(x)+uniqueid.get(x)+"";
+    //dir_path="/home/ttt/moodle-test/"+userid.get(x)+uniqueid.get(x)+"";
+
     File dir = new File(dir_path);
     dir.mkdir();
     }catch(Exception ex){System.out.println("   2nd main   "+ex);} 
@@ -138,13 +141,24 @@ else
   	
      try
      {	 
-     String w =answer.get(z);
-     if(w==null)
-     {w="";}
+     String rep =answer.get(z);
+     if(rep==null)
+     {rep="";}
+     String w = rep.replaceAll(String.valueOf((char)160)," ").trim();
     ofilename = keyword.get(z)+"";
     filename = ofilename+extension+"";
-    file = new File(dir_path+"/"+filename);
-    FileOutputStream fos = new FileOutputStream(file);
+    //file = new File(dir_path+"/"+filename);
+    
+      
+    FileWriter fstream = new FileWriter(dir_path+"/"+filename);
+        BufferedWriter out = new BufferedWriter(fstream);
+    out.write(w);
+    //Close the output stream
+    out.close();
+  
+    
+    
+    /*FileOutputStream fos = new FileOutputStream(file);
     DataOutputStream dos = new DataOutputStream(fos);
     char[] ch = w.toCharArray();
     for(int i=0;i< ch.length;i++)
@@ -152,13 +166,13 @@ else
        int b = (int)ch[i];
        dos.write(b);
     }
-    
+    */
     
     
     key=keyword.get(z);
     location =dir_path;
     }catch(Exception e1){System.out.println("e1 :"+e1);}   
-    if(key.equals("Addition"))
+   if(key.equals("Addition"))
     {	
        Testcode_interface ttt = new Testcode_implementation();
        ccc = ttt.additiontest(location,filename,language,ofilename);
@@ -185,11 +199,23 @@ else
       else if(key.equals("Average"))
      {
        Testcode_interface ttt = new Testcode_implementation();
-       ccc = ttt.interesttest(location,filename,language,ofilename);
+       ccc = ttt.averagetest(location,filename,language,ofilename);
        System.out.println("\n\n\n\nfrom face  average"+ccc);
      }
-     else
+       else if(key.equals("Cube"))
      {
+       Testcode_interface ttt = new Testcode_implementation();
+       ccc = ttt.cubetest(location,filename,language,ofilename);
+       System.out.println("\n\n\n\nfrom face  cube"+ccc);
+     }
+       else if(key.equals("Area"))
+     {
+       Testcode_interface ttt = new Testcode_implementation();
+       ccc = ttt.areatest(location,filename,language,ofilename);
+       System.out.println("\n\n\n\nfrom face  area "+ccc);
+     }
+     else
+    {
       System.out.println("no input");
      }
      
@@ -213,7 +239,7 @@ else
     //}
     }
      
-    try
+   try
     {
     System.out.println(attemptid2.get(0)+"  "+attemptid2.get((attemptid2.size())-1)+"  "+attemptid2.size());
     ResultSet rs3 = sts4.executeQuery("select sum(fraction), avg(fraction) from mdl_question_attempt_steps where userid ="+ userid.get(x)+" and questionattemptid between "+attemptid2.get(0)+" and "+attemptid2.get((attemptid2.size())-1)+";");
@@ -247,7 +273,7 @@ System.out.println("  pp"+sumgrades+average);
    System.out.println("the"+update);
    sumgrades=0;average=0;   
   }catch(Exception e6){System.out.println("e6 :"+e6);}	
-    
+   
         attemptid2.clear();   
         attemptid.clear();
  	 questionid.clear();
