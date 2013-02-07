@@ -20,7 +20,7 @@ class Testcode_implementation implements Testcode_interface
 				File f=new File(s);
 			       if(l.equalsIgnoreCase("C"))
 				{	
-				 compile1= "gcc "+ff+" -o addd";
+				 compile1= "gcc "+ff+" -lconio -o addd";
 				 run2 = "./addd";
 	 			}	
                                 else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
@@ -142,7 +142,7 @@ class Testcode_implementation implements Testcode_interface
 				
 			  if(l.equalsIgnoreCase("C"))
 				{	
-				 compile1= "gcc "+ff+" -o sum";
+				 compile1= "gcc "+ff+" -lconio -o sum";
 				 run2 = "./sum";
 	 			}	
                                 else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
@@ -265,7 +265,7 @@ return count2;
 				
 			 if(l.equalsIgnoreCase("C"))
 				{	
-				 compile1= "gcc "+ff+" -o peri";
+				 compile1= "gcc "+ff+" -lconio -o peri";
 				 run2 = "./peri";
 	 			}	
                                 else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
@@ -365,6 +365,239 @@ return count2;
  return count2;   	
  }
  
+
+  public int areatest(String s,String ff, String l, String ofn)
+ {
+    boolean success = false;
+    
+    String check="";
+    int program=0;
+    int count2=0;
+	  String compile1 = null;
+   String run2 = null;
+		try
+	 		{
+	 		File f=new File(s);
+				
+			 if(l.equalsIgnoreCase("C"))
+				{	
+				 compile1= "gcc "+ff+" -lconio -o are";
+				 run2 = "./are";
+	 			}	
+                                else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
+				{
+ 		                 compile1= "g++ "+ff+" -o are";
+				 run2 = "./are";
+				}
+				else if(l.equalsIgnoreCase("java"))
+				{
+ 		                 compile1= "javac  "+ff;
+				 run2 = "java "+ofn;
+				}
+	 				
+			Process p1 = Runtime.getRuntime().exec(compile1,null,f);
+		try
+		{
+		p1.waitFor();
+		}catch(Exception eee){}
+		
+		
+        BufferedReader stdError1 = new BufferedReader(new InputStreamReader(p1.getErrorStream()));
+			if((stdError1.readLine())== null)
+			{
+			  System.out.println("1- right");
+			  success=true;
+			
+			}
+			else
+			{
+			  System.out.println("1-wrong");
+			  success= false;
+			}
+
+			if(success)	
+	 		{
+	 		//String compile2 = "gcc "+fil+"2.c -o putt";
+	 	
+				String input12[] = new String[3]; //String input22[] = new String[3];
+				String output2[] = new String[3];
+				input12[0]= "10";
+				input12[1]= "5";
+				input12[2]="6";
+				
+				output2[0]= "314";
+				output2[1]= "78";
+				output2[2]="113";
+				
+			//Process pp2 = Runtime.getRuntime().exec(compile2,null,f);
+       		//System.out.println("tttttttttttttttttttt "+pp2.waitFor());
+				for(int i=0;i<3;i++)
+				{
+	
+		System.out.println(input12[i]+output2[i]);
+        //Process pp2 = Runtime.getRuntime().exec(compile2,null,f);
+        Process p2 = Runtime.getRuntime().exec(run2,null,f);
+				
+				 BufferedReader br2 = new BufferedReader(new InputStreamReader(p2.getInputStream()));
+        //System.out.println(br2.readLine());
+        //br2.close();
+        BufferedWriter bw2 = new BufferedWriter(new OutputStreamWriter(p2.getOutputStream()));
+        String in1 =(input12[i]).toString();
+        bw2.write(in1+"\n");
+		//String in2 =(input22[i]).toString();
+        //bw2.write(in2+"\n");
+        bw2.close();
+        System.out.println("input submitted: "+in1);
+        //BufferedReader br3 = new BufferedReader(new InputStreamReader(p2.getInputStream()));
+        String outt=null; String readconsole=null;
+		while((readconsole=br2.readLine())!=null)
+		 {outt =outt +" "+readconsole+" " ;} 
+        
+        br2.close();
+	System.out.println("output from other processs: "+outt);
+	if(outt.matches(".*"+output2[i]+".*"))
+	{
+	  System.out.println("right");
+	  count2++;
+	}
+	}
+	if(count2==3)
+	{
+	System.out.println("Program correct");
+	program++;
+	check = ""+check;
+	}
+	else
+	{
+		System.out.println("Program just wrong");
+	}
+		System.out.println(program+check);
+	}
+	else
+	{
+	 System.out.println("Program wrong");
+	}
+    }catch(Exception e2){System.out.println("run time error2, so wrong"+e2);}
+ return count2;   	
+ }
+
+
+ 
+  public int cubetest(String s,String ff, String l, String ofn)
+ {
+    boolean success = false;
+    
+    String check="";
+    int program=0;
+    int count2=0;
+	  String compile1 = null;
+   String run2 = null;
+		try
+	 		{
+	 		File f=new File(s);
+				
+			 if(l.equalsIgnoreCase("C"))
+				{	
+				 compile1= "gcc "+ff+" -lconio -o cub";
+				 run2 = "./cub";
+	 			}	
+                                else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
+				{
+ 		                 compile1= "g++ "+ff+" -o cub";
+				 run2 = "./cub";
+				}
+				else if(l.equalsIgnoreCase("java"))
+				{
+ 		                 compile1= "javac  "+ff;
+				 run2 = "java "+ofn;
+				}
+	 				
+			Process p1 = Runtime.getRuntime().exec(compile1,null,f);
+		try
+		{
+		p1.waitFor();
+		}catch(Exception eee){}
+		
+		
+        BufferedReader stdError1 = new BufferedReader(new InputStreamReader(p1.getErrorStream()));
+			if((stdError1.readLine())== null)
+			{
+			  System.out.println("1- right");
+			  success=true;
+			
+			}
+			else
+			{
+			  System.out.println("1-wrong");
+			  success= false;
+			}
+
+			if(success)	
+	 		{
+	 		//String compile2 = "gcc "+fil+"2.c -o putt";
+	 	
+				String input12[] = new String[3]; //String input22[] = new String[3];
+				String output2[] = new String[3];
+				input12[0]= "9";
+				input12[1]= "7";
+				input12[2]="10";
+				
+				output2[0]= "729";
+				output2[1]= "343";
+				output2[2]="1000";
+				
+			//Process pp2 = Runtime.getRuntime().exec(compile2,null,f);
+       		//System.out.println("tttttttttttttttttttt "+pp2.waitFor());
+				for(int i=0;i<3;i++)
+				{
+	
+		System.out.println(input12[i]+output2[i]);
+        //Process pp2 = Runtime.getRuntime().exec(compile2,null,f);
+        Process p2 = Runtime.getRuntime().exec(run2,null,f);
+				
+				 BufferedReader br2 = new BufferedReader(new InputStreamReader(p2.getInputStream()));
+        //System.out.println(br2.readLine());
+        //br2.close();
+        BufferedWriter bw2 = new BufferedWriter(new OutputStreamWriter(p2.getOutputStream()));
+        String in1 =(input12[i]).toString();
+        bw2.write(in1+"\n");
+		//String in2 =(input22[i]).toString();
+        //bw2.write(in2+"\n");
+        bw2.close();
+        System.out.println("input submitted: "+in1);
+        //BufferedReader br3 = new BufferedReader(new InputStreamReader(p2.getInputStream()));
+        String outt=null; String readconsole=null;
+		while((readconsole=br2.readLine())!=null)
+		 {outt =outt +" "+readconsole+" " ;} 
+        
+        br2.close();
+	System.out.println("output from other processs: "+outt);
+	if(outt.matches(".*"+output2[i]+".*"))
+	{
+	  System.out.println("right");
+	  count2++;
+	}
+	}
+	if(count2==3)
+	{
+	System.out.println("Program correct");
+	program++;
+	check = ""+check;
+	}
+	else
+	{
+		System.out.println("Program just wrong");
+	}
+		System.out.println(program+check);
+	}
+	else
+	{
+	 System.out.println("Program wrong");
+	}
+    }catch(Exception e2){System.out.println("run time error2, so wrong"+e2);}
+ return count2;   	
+ }
+ 
  
   public int averagetest(String s, String ff, String l, String ofn)
   {
@@ -384,7 +617,7 @@ return count2;
 				
 				 if(l.equalsIgnoreCase("C"))
 				{	
-				 compile1= "gcc "+ff+" -o avg";
+				 compile1= "gcc "+ff+" -lconio -o avg";
 				 run2 = "./avg";
 	 			}	
                                 else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
@@ -424,21 +657,21 @@ return count2;
 	 			
 				String input12[] = new String[3]; String input22[] = new String[3];String input32[] = new String[3];
 				String output2[] = new String[3];
-				input12[0]= "50";
+				input12[0]= "5";
 				input12[1]= "30";
-				input12[2]="65";
+				input12[2]="96";
 				
-				input22[0]= "72";
-				input22[1]= "65";
+				input22[0]= "70";
+				input22[1]= "66";
 				input22[2]="58";
 				
-				input32[0]= "35";
-				input32[1]= "46";
+				input32[0]= "45";
+				input32[1]= "300";
 				input32[2]="88";
 			
-				output2[0]= "52.33";
-				output2[1]= "47.00";
-				output2[2]="70.33";
+				output2[0]= "40";
+				output2[1]= "132";
+				output2[2]="80";
 				
 			//Process pp2 = Runtime.getRuntime().exec(compile2,null,f);
        		//System.out.println("tttttttttttttttttttt "+pp2.waitFor());
@@ -516,7 +749,7 @@ return count2;
 				
 				 if(l.equalsIgnoreCase("C"))
 				{	
-				 compile1= "gcc "+ff+" -o interest";
+				 compile1= "gcc "+ff+" -lconio -o interest";
 				 run2 = "./interest";
 	 			}	
                                 else if(l.equalsIgnoreCase("C++") ||  l.equalsIgnoreCase("CPP"))
