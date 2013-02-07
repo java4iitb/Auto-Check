@@ -4,3 +4,6 @@ Auto-check
 
 This script Auto-Check the code written in different programming
 languages.
+
+It is integrated with moodle. The student gives test in moodle and submits the code.
+The code is fetched from the database, compiled and tested. Then the tables are updated and student can veiw the result.
