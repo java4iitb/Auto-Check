@@ -9,6 +9,8 @@ public class Autocheck
   try
   {
   int quizid=0;
+  int item=0;
+
   if(arg[0]!=null)
   {
   quizid=Integer.parseInt(arg[0]);
@@ -21,10 +23,12 @@ public class Autocheck
 if(language.equalsIgnoreCase("C"))
  {
    extension = ".c";
+   item = 16;
  }
 else if((language.equalsIgnoreCase("C++")) || (language.equalsIgnoreCase("CPP")))
 {
   extension = ".cpp";
+  item = 31;
 }
 else if(language.equalsIgnoreCase("java"))
 {
@@ -60,8 +64,8 @@ else
     try
     {
      Class.forName("com.mysql.jdbc.Driver");
-     Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/OTC","javauser","*******");
-    // Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/newmoodle2_4","root","root");
+//     Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/OTC","javauser","javauser123*");
+     Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/newmoodle2_4","root","root");
      Statement sts1 = con.createStatement();
      Statement sts2 = con.createStatement();
      
@@ -69,7 +73,7 @@ else
      Statement sts4 = con.createStatement();
      Statement sts5 = con.createStatement();
      Statement sts6 =con.createStatement();
-     
+     Statement sts7 = con.createStatement();
      
    ResultSet rs = sts1.executeQuery("select userid, uniqueid from mdl_quiz_attempts where quiz="+quizid+" and sumgrades is NULL;");
     //  ResultSet rs = sts1.executeQuery("select userid, uniqueid from mdl_quiz_attempts where quiz="+quizid+";");
@@ -130,8 +134,8 @@ else
     
     try
     {
-     dir_path="/home/javauser/testing_v2/cache/"+userid.get(x)+uniqueid.get(x)+"";
-    //dir_path="/home/ttt/moodle-test/"+userid.get(x)+uniqueid.get(x)+"";
+    // dir_path="/home/javauser/testing_v2/cache/"+userid.get(x)+uniqueid.get(x)+"";
+    dir_path="/home/ttt/moodle-test/"+userid.get(x)+uniqueid.get(x)+"";
 
     File dir = new File(dir_path);
     dir.mkdir();
@@ -214,6 +218,18 @@ else
        ccc = ttt.areatest(location,filename,language,ofilename);
        System.out.println("\n\n\n\nfrom face  area "+ccc);
      }
+       else if(key.equals("Velocity"))
+     {
+       Testcode_interface ttt = new Testcode_implementation();
+       ccc = ttt.velocitytest(location,filename,language,ofilename);
+       System.out.println("\n\n\n\nfrom face  velocity "+ccc);
+     }
+       else if(key.equals("Length"))
+     {
+       Testcode_interface ttt = new Testcode_implementation();
+       ccc = ttt.lengthtest(location,filename,language,ofilename);
+       System.out.println("\n\n\n\nfrom face  length "+ccc);
+     }
      else
     {
       System.out.println("no input");
@@ -271,6 +287,16 @@ System.out.println("  pp"+sumgrades+average);
    ps.setInt(5,0);
    update= ps.executeUpdate(); 
    System.out.println("the"+update);
+/*
+ PreparedStatement ps2 = con.prepareStatement("insert into mdl_grade_grades (itemid,userid,finalgrade) values (?,?,?);"); 
+ ps2.setInt(1,item);
+ ps2.setInt(2,userid.get(x));
+ ps2.setDouble(3,average);
+ update = ps2.executeUpdate();
+*/
+
+update =  sts7.executeUpdate("update mdl_grade_grades set finalgrade ="+average+" where  userid="+userid.get(x)+" and itemid="+item+";");
+    System.out.println("the2"+update);
    sumgrades=0;average=0;   
   }catch(Exception e6){System.out.println("e6 :"+e6);}	
    
@@ -290,3 +316,4 @@ System.out.println("  pp"+sumgrades+average);
   }
  
 }
+
