@@ -33,6 +33,7 @@ else if((language.equalsIgnoreCase("C++")) || (language.equalsIgnoreCase("CPP"))
 else if(language.equalsIgnoreCase("java"))
 {
  extension = ".java";
+ item=32;
 }
 else
 {
