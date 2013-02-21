@@ -1,6 +1,17 @@
 <html>
 DONE!!!
 <?php
+
+require_once("config.php");
+require_login();
+$PAGE->set_title('Auto-Check');
+$site=get_site();
+$loginsite='Auto-Check';
+$PAGE->set_heading($site->fullname);
+$PAGE->navbar->add($loginsite);
+echo $OUTPUT -> header();
+
+
  $option = $_REQUEST["quiz"];
  $quizno = null;
  if($option=="c")
@@ -30,5 +41,6 @@ for($i=0;$i<=count($read_console);$i++)
 {
 echo $read_console[$i]."</br>";
 }
+echo $OUTPUT -> footer();
 ?>
 </html>
