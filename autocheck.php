@@ -7,6 +7,15 @@ Hello</br>
 
  $a ="hello";
  echo $a;
+require_once("config.php");
+require_login();
+$PAGE->set_title('Auto-Check');
+$site=get_site();
+$loginsite='Auto-Check';
+$PAGE->set_heading($site->fullname);
+$PAGE->navbar->add($loginsite);
+echo $OUTPUT -> header();
+
 ?>
 
 <form id="test" name="test" method="post" action="output.php">
@@ -48,4 +57,7 @@ function getSelectedRadio(radio_name)
 }
 </script>
 </body>
+<?php
+echo $OUTPUT -> footer();
+?>
 </html>
