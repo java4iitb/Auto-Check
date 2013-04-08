@@ -8,6 +8,8 @@ class Testcode_implementation implements Testcode_interface
   {
    boolean success = false;
     
+    boolean loop_flag=false;
+
     String check="";
     int program=0;
    int count2=0;
@@ -76,9 +78,12 @@ class Testcode_implementation implements Testcode_interface
 	
 		System.out.println(input12[i]+input22[i]+output2[i]);
         //Process pp2 = Runtime.getRuntime().exec(compile2,null,f);
-        Process p2 = Runtime.getRuntime().exec(run2,null,f);
+     	
+	long  process_time = System.currentTimeMillis() + 5000;
+        
+	Process p2 = Runtime.getRuntime().exec(run2,null,f);
 				
-				 BufferedReader br2 = new BufferedReader(new InputStreamReader(p2.getInputStream()));
+	 BufferedReader br2 = new BufferedReader(new InputStreamReader(p2.getInputStream()));
         //System.out.println(br2.readLine());
         //br2.close();
         BufferedWriter bw2 = new BufferedWriter(new OutputStreamWriter(p2.getOutputStream()));
@@ -91,14 +96,31 @@ class Testcode_implementation implements Testcode_interface
         //BufferedReader br3 = new BufferedReader(new InputStreamReader(p2.getInputStream()));
         String outt=null; String readconsole=null;
 		while((readconsole=br2.readLine())!=null)
-		 {outt =outt +" "+readconsole+" " ;} 
+		 {
+			outt =outt +" "+readconsole+" " ;
+			if(System.currentTimeMillis() > process_time)
+                        {
+				System.out.println("Status check");
+ 				try
+ 				{
+					p2.exitValue();
+				}catch(Exception ev){System.out.println("Process on, destroy it");loop_flag=true;break;}
+   			}
+		} 
         
         br2.close();
+	if(!loop_flag)
+        {
 	System.out.println("output from other processs: "+outt);
 	if(outt.matches(".*"+output2[i]+".*"))
 	{
 	  System.out.println("right");
 	  count2++;
+	}
+        }
+        else
+        {
+          break;
 	}
 	}
 	if(count2==3)

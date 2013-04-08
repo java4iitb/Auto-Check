@@ -7,4 +7,6 @@ interface Testcode_interface
  public int averagetest(String s,String f, String language, String ofile);
  public int cubetest(String s,String f, String language, String ofile);
  public int areatest(String s,String f, String language, String ofile);
+ public int velocitytest(String s,String f, String language, String ofile);
+ public int lengthtest(String s,String f, String language, String ofile);
 }
